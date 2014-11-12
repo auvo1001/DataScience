@@ -9,11 +9,8 @@ import scrapy
 
 
 class DataScienceItem(scrapy.Item):
-    name = scrapy.Field()
-    respons = scrapy.Field() #responsibility
-    req = scrapy.Field() #requirements
-    minqual = scrapy.Field() #minimum qualifications
-    prefqual = scrapy.Field() #prefered qualitifications
-    company = scrapy.Field() #company
-    location = scrapy.Field() #location
+    title = scrapy.Field()
+    text_span = scrapy.Field() #these are the "span"
+    text_li = scrapy.Field() #these are the bullet points
+
     pass
