@@ -12,6 +12,7 @@ BOT_NAME = 'data_science'
 
 SPIDER_MODULES = ['data_science.spiders']
 NEWSPIDER_MODULE = 'data_science.spiders'
-
+DOWNLOAD_DELAY = 2
+COOKIES_ENABLED = False
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'data_science (+http://www.yourdomain.com)'
