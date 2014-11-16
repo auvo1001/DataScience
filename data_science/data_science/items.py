@@ -12,5 +12,6 @@ class DataScienceItem(scrapy.Item):
     title = scrapy.Field()
     text_span = scrapy.Field() #these are the "span"
     text_li = scrapy.Field() #these are the bullet points
+    text_all = scrapy.Field()
 
     pass

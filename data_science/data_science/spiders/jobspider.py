@@ -10,23 +10,20 @@ class JobSpider(scrapy.Spider):
     name = "jobspider"
     allowed_domains = ["analytictalent.com"]
     start_urls = (
-        #'http://www.analytictalent.com/',
-        'http://careers.analytictalent.com/jobs/lead-quantitative-analyst-operations-decision-support-google-mountain-view-california-69333430-d?contextType=browse'
-        #hard code this link for testing. However, each individual job can run using this spider,
-    )
-
-    #rules = (Rule(SgmlLinkExtractor(allow=("jobs", ),)
-    #, callback="parse_items", follow= True),
-    #)
+        'http://www.analytictalent.com/',
+'http://careers.analytictalent.com/jobs/software-engineer-python-youtube-san-bruno-california-71585336-d?contextType=browse'
+)
     def parse(self, response):
 
         items = []
         item = DataScienceItem()
-        item['title'] =  response.xpath('//title/text()').extract() #title of the page
-        item['text_span'] =  response.xpath('//span/text()').extract() #span class, usually all the texts
         item['text_li'] =  response.xpath('//li/text()').extract() #bullet points in the texts
+        item['text_span'] =  response.xpath('//span/text()').extract()
+        item['text_all'] =  response.xpath('//*/text()').extract() #span class, usually all the texts
+        item['title'] =  response.xpath('//title/text()').extract() #title of the page]
+
         items.append(item)
 
-        filename = "datascience.txt"
+        filename = "software_related_job/software5.txt"
         with open(filename, 'wb') as f:
             f.write(str(items))

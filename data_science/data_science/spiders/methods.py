@@ -22,11 +22,12 @@ class SiteSpider(scrapy.Spider):
     spider for the site analytictalent.com
     """
     name = "sitespider"
-    allowed_domains = ["analytictalent.com"]
+    allowed_domains = ["www.cs.hmc.edu"]
     start_urls = (
         'http://www.analytictalent.com/',
+        'http://careers.analytictalent.com/jobs/search/',
         )
-    rules = (Rule(linkextractors.lxmlhtml.LxmlLinkExtractor(allow=("category" ),)
+    rules = (Rule(linkextractors.lxmlhtml.LxmlLinkExtractor(allow=("business" ),)
     , callback="parse_items", follow= True),
     )
     def parse(self, response):
