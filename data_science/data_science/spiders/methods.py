@@ -1,44 +1,27 @@
 import scrapy
-from scrapy.contrib.spiders import CrawlSpider, Rule
-from data_science.items import DataScienceItem
-from scrapy.contrib import linkextractors
-#def get_category():
-#    #first, get all the anchor tags
-#    scrapy.fetch("http://www.analytictalent.com/")
-#    anchor = response.xpath('//a/@href').extract()
-#    #then, extract all category out
-#    category  = [s.replace("http://careers.analytictalent.com/jobs/browse/category/","") for s in anchor if "category" in s]
-#    top = "http://careers.analytictalent.com/jobs/search/results?category%5B0%5D="
-#    bot = "&format=rss"
-#    url = []
-#    for cat in category:
-#        url.append(top+cat+url)
-#
-#    return url
-#    #
+from data_science.items import Link
 
-class SiteSpider(scrapy.Spider):
+
+class rssSpider(scrapy.Spider):
     """
-    spider for the site analytictalent.com
+    spider for the site analytictalent.com RSS
+
     """
-    name = "sitespider"
-    allowed_domains = ["www.cs.hmc.edu"]
+    name = "rssspider"
+    allowed_domains = ["http://www.analytictalent.com/"]
     start_urls = (
-        'http://www.analytictalent.com/',
-        'http://careers.analytictalent.com/jobs/search/',
+        'http://careers.analytictalent.com/jobs/search/results?rows=50&category%5B0%5D=math&format=rss',
         )
-    rules = (Rule(linkextractors.lxmlhtml.LxmlLinkExtractor(allow=("business" ),)
-    , callback="parse_items", follow= True),
-    )
+
     def parse(self, response):
 
         items = []
-        item = DataScienceItem()
-        item['title'] =  response.xpath('//title/text()').extract() #title of the page
-        item['text_span'] =  response.xpath('//span/text()').extract() #span class, usually all the texts
-        item['text_li'] =  response.xpath('//li/text()').extract() #bullet points in the texts
+        item = Link()
+        item['title'] = response.xpath('//title/text()').extract()
+        item['url'] = response.xpath('//link/text()').extract()
+
         items.append(item)
 
-        filename = "sitecrawl.txt"
+        filename = "listURL.txt"
         with open(filename, 'wb') as f:
             f.write(str(items))

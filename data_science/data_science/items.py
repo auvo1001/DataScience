@@ -10,8 +10,12 @@ import scrapy
 
 class DataScienceItem(scrapy.Item):
     title = scrapy.Field()
-    text_span = scrapy.Field() #these are the "span"
-    text_li = scrapy.Field() #these are the bullet points
-    text_all = scrapy.Field()
-
+    text_p = scrapy.Field() #these are the "span"
+    text_all = scrapy.Field() #all the field
+    text_a  = scrapy.Field() #all the links href
     pass
+
+class Link(scrapy.Item):
+
+    title = scrapy.Field()
+    url = scrapy.Field()
