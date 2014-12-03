@@ -22,7 +22,7 @@ class JobSpider(scrapy.Spider):
     def parse(self, response):
 
         ###urlFile has to change per the local path
-        for site in response:
+        for site in response_count:
             count +=1
             items = []
             item = DataScienceItem()
