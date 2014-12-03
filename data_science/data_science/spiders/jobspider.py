@@ -15,22 +15,22 @@ class JobSpider(scrapy.Spider):
     #filedict = urlread.read()
     count = 0
     start_urls = (
-        'http://careers.analytictalent.com/jobs/advanced-technologist-level-3-4-huntsville-alabama-72055208-d?contextType=rss',
-         'http://careers.analytictalent.com/jobs/aerospace-systems-modeling-and-simulation-engineer-level-2-3-huntsville-alabama-72055209-d?contextType=rss',
-         'http://careers.analytictalent.com/jobs/parallel-database-systems-engineer-level-2-3-huntsville-alabama-72060146-d?contextType=rss',
-)
+         'http://careers.analytictalent.com/jobs/data-scientist-machine-learning-expert-redwood-city-california-94065-72182506-d?contextType=rss',
+         'http://careers.analytictalent.com/jobs/the-channel-4-data-planning-analytics-phd-scholarship-2015-london-england-72171435-d?contextType=rss',
+    )
     def parse(self, response):
 
         ###urlFile has to change per the local path
-        for site in response_count:
-            count +=1
-            items = []
-            item = DataScienceItem()
-            item['text_a'] =  response.xpath('//a/@href').extract() #bullet points in the texts
-            item['text_all'] =  response.xpath('//*/text()').extract() #span class, usually all the texts
-            item['title'] =  response.xpath('//title/text()').extract() #title of the page]
-            item['text_p'] =  response.xpath('//p/text(x)').extract() #span class, usually all the texts
 
-            filename = "ttt"
-            with open(filename+str(count)+".txt", 'wb') as f:
-                f.write(str(items))
+        items = []
+        item = DataScienceItem()
+        item['text_a'] =  response.xpath('//a/@href').extract() #bullet points in the texts
+        item['text_all'] =  response.xpath('//*/text()').extract() #span class, usually all the texts
+        item['title'] =  response.xpath('//title/text()').extract() #title of the page]
+        item['text_p'] =  response.xpath('//p/text()').extract() #span class, usually all the texts
+
+        items.append(item)
+
+        filename = "test.txt"
+        with open(filename, 'wb') as f:
+            f.write(str(items))
