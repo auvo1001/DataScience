@@ -18,6 +18,11 @@ class JobSpider(scrapy.Spider):
          'http://careers.analytictalent.com/jobs/data-scientist-machine-learning-expert-redwood-city-california-94065-72182506-d?contextType=rss',
          'http://careers.analytictalent.com/jobs/the-channel-4-data-planning-analytics-phd-scholarship-2015-london-england-72171435-d?contextType=rss',
     )
+
+
+
+
+
     def parse(self, response):
 
         ###urlFile has to change per the local path
@@ -31,6 +36,18 @@ class JobSpider(scrapy.Spider):
 
         items.append(item)
 
-        filename = "test.txt"
-        with open(filename, 'wb') as f:
+
+        #filename = str(item['title'][0])
+        #filename = filename.replace('/',"")
+        #filename = filename.replace(' ',"")
+        #filename = filename.replace('&',"")
+        #filename = filename.replace(',',"")
+        #filename = filename.replace('|',"")
+        s =item['title'][0]
+        new_s =""
+        for i in s :
+         if (i >= "0" and i <="9") or (i>="a" and i <= "z") or ( i>="A" and i<="Z"):
+             new_s += i
+        filename = new_s
+        with open(filename+".txt", 'wb') as f:
             f.write(str(items))
