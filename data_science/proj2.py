@@ -95,7 +95,7 @@ def plot_chart():
 def searchForFiles():
     """
     """
-
+#check the listdir. this is my computer directory. Yours might be different
     for file in os.listdir("C:\Users\\a\Google Drive\workspace\DataScience\data_science\data_science\spiders\jobs"):
        if file.endswith(".txt"):
          countSkills(file)
